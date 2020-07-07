@@ -97,10 +97,7 @@ df.columns = df.columns.str.replace('>', '')
 df.columns = df.columns.str.replace(']', '')
 df.columns = df.columns.str.replace('[', '')
 
-# Bring y to first column
-df = df.set_index('y')
-
-# df.to_csv(datasets / 'kapusta_genus_raw.csv', index=True)
+# df.to_csv(datasets / 'kapusta_genus_raw_maxi.csv', index=True)
 
 ############################## Grumaz ##################################################################################
 # Parse reports
@@ -124,7 +121,7 @@ df2.columns = df2.columns.str.replace('>', '')
 df2.columns = df2.columns.str.replace(']', '')
 df2.columns = df2.columns.str.replace('[', '')
 
-# df2.to_csv(datasets / 'grumaz_genus_raw.csv', index=True)
+# df2.to_csv(datasets / 'grumaz_genus_raw_maxi.csv', index=True)
 
 #################################### Karius ############################################################################
 
@@ -148,5 +145,9 @@ df3.columns = df3.columns.str.replace('>', '')
 df3.columns = df3.columns.str.replace(']', '')
 df3.columns = df3.columns.str.replace('[', '')
 
-# df3.to_csv(datasets / 'karius_genus_raw.csv', index=True)
+# df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=True)
+
+# Merge datasets
+final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)
+final_df.to_csv(datasets / 'kapusta_grumaz_karius_genus_raw.csv', sep=',', index=False, header=True)
 
