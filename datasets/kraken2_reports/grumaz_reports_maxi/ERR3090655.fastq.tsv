@@ -1,0 +1,99 @@
+100.00	1814	49	R	1	root
+ 97.24	1764	30	R1	131567	  cellular organisms
+ 95.59	1734	110	D	2	    Bacteria
+ 68.91	1250	89	P	1224	      Proteobacteria
+ 59.21	1074	37	C	1236	        Gammaproteobacteria
+ 49.01	889	7	O	135614	          Xanthomonadales
+ 48.62	882	321	F	32033	            Xanthomonadaceae
+ 30.87	560	313	G	40323	              Stenotrophomonas
+ 13.62	247	8	G1	995085	                Stenotrophomonas maltophilia group
+ 13.18	239	239	S	40324	                  Stenotrophomonas maltophilia
+  0.06	1	0	G	338	              Xanthomonas
+  0.06	1	1	S	56448	                Xanthomonas arboricola
+  7.50	136	6	O	91347	          Enterobacterales
+  7.17	130	37	F	543	            Enterobacteriaceae
+  4.91	89	83	G	547	              Enterobacter
+  0.33	6	4	G1	354276	                Enterobacter cloacae complex
+  0.11	2	2	S	550	                  Enterobacter cloacae
+  0.17	3	0	G	561	              Escherichia
+  0.17	3	1	S	562	                Escherichia coli
+  0.06	1	1	S1	868184	                  Escherichia coli DEC10E
+  0.06	1	1	S1	1182673	                  Escherichia coli KTE66
+  0.06	1	0	G	570	              Klebsiella
+  0.06	1	1	S	573	                Klebsiella pneumoniae
+  0.66	12	0	O	72274	          Pseudomonadales
+  0.61	11	0	F	135621	            Pseudomonadaceae
+  0.61	11	10	G	286	              Pseudomonas
+  0.06	1	0	G1	136841	                Pseudomonas aeruginosa group
+  0.06	1	1	S	300	                  Pseudomonas mendocina
+  0.06	1	0	F	468	            Moraxellaceae
+  0.06	1	1	G	469	              Acinetobacter
+  4.74	86	9	C	28216	        Betaproteobacteria
+  4.24	77	9	O	80840	          Burkholderiales
+  3.03	55	36	F	80864	            Comamonadaceae
+  0.66	12	7	G	12916	              Acidovorax
+  0.11	2	2	S	358220	                Acidovorax sp. KKS102
+  0.06	1	1	S	47920	                Acidovorax delafieldii
+  0.06	1	1	S	2219062	                Acidovorax sp. ST3
+  0.06	1	1	S	80878	                Acidovorax temperans
+  0.22	4	4	G	80865	              Delftia
+  0.06	1	1	G	34072	              Variovorax
+  0.06	1	0	F1	83494	              unclassified Comamonadaceae
+  0.06	1	1	S	1768803	                Comamonadaceae bacterium CCH12-A10
+  0.06	1	1	G	201096	              Alicycliphilus
+  0.50	9	1	F	75682	            Oxalobacteraceae
+  0.39	7	7	G	963	              Herbaspirillum
+  0.06	1	0	G	149698	              Massilia
+  0.06	1	1	S	1500894	                Massilia sp. 9096
+  0.11	2	0	O1	119065	            unclassified Burkholderiales
+  0.11	2	0	O2	224471	              Burkholderiales Genera incertae sedis
+  0.06	1	0	G	32012	                Thiomonas
+  0.06	1	0	S	926	                  Thiomonas intermedia
+  0.06	1	1	S1	75379	                    Thiomonas intermedia K12
+  0.06	1	0	G	318147	                Paucibacter
+  0.06	1	1	S	1768242	                  Paucibacter sp. KCTC 42545
+  0.06	1	0	F	506	            Alcaligenaceae
+  0.06	1	1	G	222	              Achromobacter
+  0.06	1	0	F	119060	            Burkholderiaceae
+  0.06	1	1	G	32008	              Burkholderia
+  0.06	1	0	C	28211	        Alphaproteobacteria
+  0.06	1	0	O	356	          Rhizobiales
+  0.06	1	0	F	41294	            Bradyrhizobiaceae
+  0.06	1	1	G	374	              Bradyrhizobium
+ 20.62	374	0	D1	1783272	      Terrabacteria group
+ 20.51	372	0	P	201174	        Actinobacteria
+ 20.51	372	3	C	1760	          Actinobacteria
+ 19.90	361	14	O	85007	            Corynebacteriales
+ 19.07	346	0	F	85025	              Nocardiaceae
+ 19.07	346	321	G	1827	                Rhodococcus
+  1.32	24	24	S	1833	                  Rhodococcus erythropolis
+  0.06	1	1	S	1049584	                  Rhodococcus enclensis
+  0.06	1	0	F	85029	              Dietziaceae
+  0.06	1	0	G	37914	                Dietzia
+  0.06	1	1	S	139021	                  Dietzia psychralcaliphila
+  0.33	6	0	O	85009	            Propionibacteriales
+  0.33	6	6	F	31957	              Propionibacteriaceae
+  0.06	1	0	O	85006	            Micrococcales
+  0.06	1	0	F	85023	              Microbacteriaceae
+  0.06	1	1	G	33882	                Microbacterium
+  0.06	1	0	O	85011	            Streptomycetales
+  0.06	1	0	F	2062	              Streptomycetaceae
+  0.06	1	0	G	228398	                Streptacidiphilus
+  0.06	1	0	S	405783	                  Streptacidiphilus rugosus
+  0.06	1	1	S1	981369	                    Streptacidiphilus rugosus AM-16
+  0.11	2	0	P	1239	        Firmicutes
+  0.06	1	0	C	91061	          Bacilli
+  0.06	1	0	O	1385	            Bacillales
+  0.06	1	0	F	90964	              Staphylococcaceae
+  0.06	1	1	G	1279	                Staphylococcus
+  0.06	1	0	C	186801	          Clostridia
+  0.06	1	0	O	186802	            Clostridiales
+  0.06	1	0	F	186804	              Peptostreptococcaceae
+  0.06	1	0	G	1870884	                Clostridioides
+  0.06	1	1	S	1496	                  Clostridioides difficile
+  0.06	1	0	D	10239	  Viruses
+  0.06	1	0	D1	35237	    dsDNA viruses, no RNA stage
+  0.06	1	0	F	151341	      Polyomaviridae
+  0.06	1	0	G	1891714	        Betapolyomavirus
+  0.06	1	0	S	1891763	          Human polyomavirus 2
+  0.06	1	1	S1	10632	            JC polyomavirus

@@ -1,0 +1,9 @@
+,test_precision,test_recall,test_F1,test_AUROC
+Raw,0.92,0.905,0.91,0.976
+RA,0.954,0.898,0.923,0.98
+Only Causal,0.897,0.857,0.874,0.955
+Only Causal (RA),0.948,0.881,0.911,0.981
+Simple Decontam,0.771,0.677,0.706,0.84
+Simple Decontam (RA),0.736,0.675,0.684,0.819
+Raw CR,0.704,0.667,0.672,0.809
+RA CR,0.515,0.482,0.491,0.662

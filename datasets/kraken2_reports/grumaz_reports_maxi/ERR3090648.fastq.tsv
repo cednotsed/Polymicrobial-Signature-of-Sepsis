@@ -1,0 +1,95 @@
+100.00	748	1	R	1	root
+ 99.06	741	10	R1	131567	  cellular organisms
+ 97.73	731	53	D	2	    Bacteria
+ 65.91	493	18	P	1224	      Proteobacteria
+ 57.75	432	14	C	1236	        Gammaproteobacteria
+ 54.41	407	4	O	135614	          Xanthomonadales
+ 53.88	403	148	F	32033	            Xanthomonadaceae
+ 34.09	255	120	G	40323	              Stenotrophomonas
+ 18.05	135	6	G1	995085	                Stenotrophomonas maltophilia group
+ 17.25	129	129	S	40324	                  Stenotrophomonas maltophilia
+  0.67	5	0	O	72274	          Pseudomonadales
+  0.67	5	0	F	135621	            Pseudomonadaceae
+  0.67	5	2	G	286	              Pseudomonas
+  0.27	2	0	G1	136843	                Pseudomonas fluorescens group
+  0.27	2	2	S	75612	                  Pseudomonas mandelii
+  0.13	1	0	G1	136849	                Pseudomonas syringae group
+  0.13	1	0	S	251701	                  Pseudomonas syringae group genomosp. 3
+  0.13	1	1	S1	323	                    Pseudomonas syringae pv. tomato
+  0.53	4	0	O	91347	          Enterobacterales
+  0.53	4	3	F	543	            Enterobacteriaceae
+  0.13	1	0	G	561	              Escherichia
+  0.13	1	1	S	562	                Escherichia coli
+  0.13	1	0	O	135622	          Alteromonadales
+  0.13	1	0	F	267890	            Shewanellaceae
+  0.13	1	0	G	22	              Shewanella
+  0.13	1	1	S	332186	                Shewanella xiamenensis
+  0.13	1	0	O	135625	          Pasteurellales
+  0.13	1	0	F	712	            Pasteurellaceae
+  0.13	1	1	G	416916	              Aggregatibacter
+  5.48	41	11	C	28216	        Betaproteobacteria
+  4.01	30	2	O	80840	          Burkholderiales
+  2.81	21	14	F	80864	            Comamonadaceae
+  0.94	7	6	G	12916	              Acidovorax
+  0.13	1	1	S	2219062	                Acidovorax sp. ST3
+  0.80	6	0	F	75682	            Oxalobacteraceae
+  0.80	6	6	G	963	              Herbaspirillum
+  0.13	1	0	F	119060	            Burkholderiaceae
+  0.13	1	1	G	48736	              Ralstonia
+  0.27	2	0	C	28211	        Alphaproteobacteria
+  0.27	2	0	O	356	          Rhizobiales
+  0.27	2	0	F	82115	            Rhizobiaceae
+  0.27	2	0	F1	227290	              Rhizobium/Agrobacterium group
+  0.27	2	0	G	379	                Rhizobium
+  0.27	2	2	S	398	                  Rhizobium tropici
+ 24.47	183	0	D1	1783272	      Terrabacteria group
+ 22.73	170	0	P	201174	        Actinobacteria
+ 22.73	170	2	C	1760	          Actinobacteria
+ 21.12	158	8	O	85007	            Corynebacteriales
+ 20.05	150	0	F	85025	              Nocardiaceae
+ 20.05	150	138	G	1827	                Rhodococcus
+  1.47	11	11	S	1833	                  Rhodococcus erythropolis
+  0.13	1	1	S	334542	                  Rhodococcus qingshengii
+  1.07	8	0	O	85009	            Propionibacteriales
+  1.07	8	8	F	31957	              Propionibacteriaceae
+  0.13	1	0	O	85006	            Micrococcales
+  0.13	1	1	F	1268	              Micrococcaceae
+  0.13	1	0	O	2037	            Actinomycetales
+  0.13	1	1	F	2049	              Actinomycetaceae
+  1.74	13	1	P	1239	        Firmicutes
+  1.47	11	3	C	91061	          Bacilli
+  0.94	7	0	O	186826	            Lactobacillales
+  0.94	7	0	F	81852	              Enterococcaceae
+  0.94	7	3	G	1350	                Enterococcus
+  0.40	3	3	S	1352	                  Enterococcus faecium
+  0.13	1	1	S	1351	                  Enterococcus faecalis
+  0.13	1	0	O	1385	            Bacillales
+  0.13	1	0	F	90964	              Staphylococcaceae
+  0.13	1	1	G	1279	                Staphylococcus
+  0.13	1	0	C	186801	          Clostridia
+  0.13	1	0	O	186802	            Clostridiales
+  0.13	1	0	F	186803	              Lachnospiraceae
+  0.13	1	0	G	841	                Roseburia
+  0.13	1	1	S	360807	                  Roseburia inulinivorans
+  0.27	2	0	D1	1783270	      FCB group
+  0.27	2	0	D2	68336	        Bacteroidetes/Chlorobi group
+  0.27	2	0	P	976	          Bacteroidetes
+  0.27	2	0	C	200643	            Bacteroidia
+  0.27	2	1	O	171549	              Bacteroidales
+  0.13	1	0	F	815	                Bacteroidaceae
+  0.13	1	0	G	816	                  Bacteroides
+  0.13	1	1	S	821	                    Bacteroides vulgatus
+  0.80	6	0	D	10239	  Viruses
+  0.80	6	0	D1	35237	    dsDNA viruses, no RNA stage
+  0.67	5	0	O	548681	      Herpesvirales
+  0.67	5	0	F	10292	        Herpesviridae
+  0.53	4	0	F1	10357	          Betaherpesvirinae
+  0.53	4	0	G	10358	            Cytomegalovirus
+  0.53	4	4	S	10359	              Human betaherpesvirus 5
+  0.13	1	0	F1	10293	          Alphaherpesvirinae
+  0.13	1	0	G	10294	            Simplexvirus
+  0.13	1	1	S	10298	              Human alphaherpesvirus 1
+  0.13	1	0	O	28883	      Caudovirales
+  0.13	1	0	F	10662	        Myoviridae
+  0.13	1	0	F1	1198136	          Tevenvirinae
+  0.13	1	1	G	10663	            T4virus

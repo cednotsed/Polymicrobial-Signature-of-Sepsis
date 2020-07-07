@@ -2,16 +2,11 @@ rm(list=ls())
 #library(devtools)
 #install_github("hallucigenia-sparsa/seqgroup")
 require('seqgroup')
-setwd('sepsis/workspace/karius/datasets')
-df <- read.csv('karius_genus_pathogens.csv')
-X <- df[, c('Lymphocryptovirus', 'Campylobacter', 'Shigella', 
-            'Bacillus', 'Veillonella', 'Betapolyomavirus', 
-            'Tannerella', 'Salmonella', 'Aeromonas', 
-            'Bifidobacterium', 'Alphatorquevirus', 'Shewanella', 
-            'Cytomegalovirus', 'Escherichia', 'Prevotella', 
-            'Lachnoclostridium', 'Proteus', 'Enterobacter', 
-            'Burkholderia', 'Pandoraea', 'Blautia', 
-            'Enterococcus', 'Stenotrophomonas')]
+setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis')
+df <- read.csv('datasets/karius_genus_raw.csv')
+X <- df[, c('Enterobacter', 'Moraxella', 'Stenotrophomonas', 'Prevotella',
+             'Escherichia', 'Burkholderia', 'Bacteroides', 'Campylobacter',
+             'Enterococcus', 'Streptococcus')]
 
 septic <- X[df$y == 'septic', ]
 healthy <- X[df$y == 'healthy', ]
@@ -34,14 +29,14 @@ numbers <- get_number(X)
 
 # Plot Septic network
 set.seed(69)
-edges <- 40
+edges <- 10
 pval <- 0.05
-width <- 1
+width <- 8
 
 # Plot septic graph
 septic_graph <- barebonesCoNet(septic,
                                norm = T,
-                               methods = c("bray", "spearman", "kld"),
+                               methods = c("spearman"),
                                init.edge.num = edges,
                                pval.cor = F,
                                pval.T = pval,
@@ -51,13 +46,17 @@ septic_graph <- barebonesCoNet(septic,
                                bh = T, 
                                plot = F,
                                keep.filtered = F,
-                               # min.occ = ncol(septic) / 10,
                                verbose = T)
 
 par(mar = c(0,0,0,0))
-png(file = "../results/sepsis_colored_network.png",width = 10, height = 8, units = 'in', res=300)
+png(file = "results/decontam/sepsis_colored_network.png",width = 10, height = 8, units = 'in', res=300)
 
-layout <- layout_(septic_graph, with_dh(weight.edge.lengths = edge_density(septic_graph)/1000))
+# Layout
+color_weight <- E(septic_graph)$weight
+color_weight[color_weight == "red"] <- color_weight[color_weight == "red"] * -3
+color_weight[color_weight == "green"] <- color_weight[color_weight == "green"] * 3 
+l <- layout_with_fr(septic_graph, weights=color_weight)
+
 plot(septic_graph,
      vertex.frame.color = "white",
      vertex.size = 8,
@@ -67,8 +66,8 @@ plot(septic_graph,
      vertex.label.family ="Arial",
      vertex.label.dist = 0.2,
      edge.width = E(septic_graph)$weight * width,
-     edge.curved = 0.2,
-     layout = layout,
+     edge.curved = 0,
+     layout = l,
      main = 'Microbial Network for Septic Patients')
 
 dev.off()
@@ -76,7 +75,7 @@ dev.off()
 # Plot healthy network
 healthy_graph <- barebonesCoNet(healthy,
                                 norm = T,
-                                methods = c("bray", "spearman", "kld"),
+                                methods = c("spearman"),
                                 init.edge.num = edges,
                                 pval.cor = F,
                                 pval.T = pval,
@@ -86,12 +85,16 @@ healthy_graph <- barebonesCoNet(healthy,
                                 bh = T, 
                                 plot = F,
                                 keep.filtered = F,
-                                # min.occ = ncol(healthy) / 10,
                                 verbose = T)
 
-layout <- layout_(healthy_graph, with_dh(weight.edge.lengths = edge_density(healthy_graph)/100))
+# Layout
+color_weight <- E(healthy_graph)$weight
+color_weight[color_weight == "red"] <- color_weight[color_weight == "red"] * -3
+color_weight[color_weight == "green"] <- color_weight[color_weight == "green"] * 3 
+l2 <- layout_with_fr(healthy_graph, weights=color_weight)
+
 par(mar = c(0,0,0,0))
-png(file = "../results/healthy_colored_network.png", width = 10, height = 8, units = 'in', res = 300)
+png(file = "results/decontam/healthy_colored_network.png", width = 10, height = 8, units = 'in', res = 300)
 
 plot(healthy_graph,
      vertex.frame.color = "white",
@@ -102,30 +105,35 @@ plot(healthy_graph,
      vertex.label.family = "Arial",
      vertex.label.dist = 0.2,
      edge.width = E(healthy_graph)$weight * width,
-     edge.curved = 0.2,
-     layout = layout,
+     edge.curved = 0,
+     layout = l2,
      main='Microbial Network for Healthy Patients')
 
 dev.off()
 
 # Substract healthy correlations
-edge_septic <- as_ids(E(septic_graph))
-edge_healthy <- as_ids(E(healthy_graph))
-idx <- intersect(edge_septic, edge_healthy) # Get boolean index from septic that are in healthy
-septic_filtered <- delete.edges(septic_graph, E(septic_graph)[idx])
+edge_septic <- E(septic_graph)
+edge_healthy <- E(healthy_graph)
+to_remove <- graph.intersection(septic_graph, healthy_graph) # Get boolean index from septic that are in healthy
+idx <- which(as_ids(edge_septic) %in% as_ids(E(to_remove)))
+septic_filtered <- delete.edges(septic_graph, idx)
+# blue <- "#33CCFF"
+# V(septic_filtered)$color <- "#999999"
+# lung <- V(septic_filtered)$name %in% c("Burkholderia", "Pandoraea", "Prevotella", "Aeromonas", "Enterobacter", "Stenotrophomonas", "Bacillus")
+# gut <- V(septic_filtered)$name %in% c("Proteus", "Enterococcus", "Lachnoclostridium", "Salmonella", "Shigella", "Blautia")
+# oral <- V(septic_filtered)$name %in% c("Bifidobacterium", "Veillonella", "Tannerella")
+# V(septic_filtered)[lung]$color <- "#33CCFF"
+# V(septic_filtered)[gut]$color <- "#CC9966"
+# V(septic_filtered)[oral]$color <- "#9933CC"
 
-blue <- "#33CCFF"
-V(septic_filtered)$color <- "#999999"
-lung <- V(septic_filtered)$name %in% c("Burkholderia", "Pandoraea", "Prevotella", "Aeromonas", "Enterobacter", "Stenotrophomonas", "Bacillus")
-gut <- V(septic_filtered)$name %in% c("Proteus", "Enterococcus", "Lachnoclostridium", "Salmonella", "Shigella", "Blautia")
-oral <- V(septic_filtered)$name %in% c("Bifidobacterium", "Veillonella", "Tannerella")
-V(septic_filtered)[lung]$color <- "#33CCFF"
-V(septic_filtered)[gut]$color <- "#CC9966"
-V(septic_filtered)[oral]$color <- "#9933CC"
-layout <- layout_(septic_filtered, with_dh(weight.edge.lengths = edge_density(septic_filtered)/500))
+# Layout
+color_weight <- E(septic_filtered)$weight
+color_weight[color_weight == "red"] <- color_weight[color_weight == "red"] * -3
+color_weight[color_weight == "green"] <- color_weight[color_weight == "green"] * 3 
+l3 <- layout_with_fr(septic_filtered, weights=color_weight)
 
 par(mar=c(0,0,0,0))
-png(file="../results/septic_corrected_colored_network.png",width = 10, height = 8, units = 'in', res=1200)
+png(file="results/decontam/septic_corrected_colored_network.png",width = 10, height = 8, units = 'in', res=1200)
 plot(septic_filtered,
      vertex.frame.color = "white",
      vertex.size = 8,
@@ -135,12 +143,12 @@ plot(septic_filtered,
      vertex.label.family = "Arial",
      vertex.label.dist = 0.2,
      edge.width = E(septic_filtered)$weight * width,
-     edge.curved = 0.2,
-     layout = layout)
+     edge.curved = 0,
+     layout = l3)
 
-legend("topright", legend=c("Oral", "Lung", "Gut"), 
-       col=c("#9933CC", "#33CCFF", "#CC9966"),
-       border = "black",
-       pch = 19, cex = 1.2)
+# legend("topright", legend=c("Oral", "Lung", "Gut"), 
+#        col=c("#9933CC", "#33CCFF", "#CC9966"),
+#        border = "black",
+#        pch = 19, cex = 1.2)
 
 dev.off()

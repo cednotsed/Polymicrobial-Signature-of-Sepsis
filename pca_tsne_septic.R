@@ -1,23 +1,19 @@
 rm(list = ls())
-setwd("~/sepsis/workspace/karius/datasets/")
+setwd("~/git_repos/Polymicrobial-Signature-of-Sepsis/")
 require(tidyr)
-df <- read.csv("karius_genus_pathogens.csv", sep = ",", stringsAsFactors = F)
-X <- df[, c('Lymphocryptovirus', 'Campylobacter', 'Shigella', 
-            'Bacillus', 'Veillonella', 'Betapolyomavirus', 
-            'Tannerella', 'Salmonella', 'Aeromonas', 
-            'Bifidobacterium', 'Alphatorquevirus', 'Shewanella', 
-            'Cytomegalovirus', 'Escherichia', 'Prevotella', 
-            'Lachnoclostridium', 'Proteus', 'Enterobacter', 
-            'Burkholderia', 'Pandoraea', 'Blautia', 
-            'Enterococcus', 'Stenotrophomonas')]
-
+df <- read.csv("datasets/karius_genus_raw.csv", sep = ",", stringsAsFactors = F)
+X <- df[, c('Campylobacter', 'Shigella', 'Escherichia',
+            'Prevotella', 'Enterobacter', 'Burkholderia',
+            'Streptococcus', 'Moraxella', 'Bacteroides',
+            'Stenotrophomonas')]
+y <- df$y
 
 # Partition by Genus
 split_cols <- separate(df, col = pathogen, sep = " ", into = c("Genus", "Species"))
-y <- split_cols$Genus
-y[y == "Human"] <- "Herpesviridae"
-y[y == "Cytomegalovirus"] <- "Herpesviridae"
-y[y == "none"] <- "Healthy Control"
+pathogens <- split_cols$Genus
+pathogens[pathogens == "Human"] <- "Herpesviridae"
+pathogens[pathogens == "Cytomegalovirus"] <- "Herpesviridae"
+pathogens[pathogens == "none"] <- "Healthy Control"
 
 # Count number of samples with non-zero k-mer counts
 get_number <- function(df) {
@@ -35,44 +31,53 @@ rowsums <- apply(X, 1, sum)
 X <- X / rowsums
 
 # Remove Signals
-X_new <- X[, colnames(X) != "Escherichia"]
-X_new <- X_new[, colnames(X_new) != "Proteus"]
-X_new <- X_new[, colnames(X_new) != "Enterococcus"]
-X_new <- X_new[, colnames(X_new) != "Cytomegalovirus"]
-X_new <- X_new[, colnames(X_new) != "Lymphocryptovirus"]
+to_remove <- c('Escherichia', 'Streptococcus', 'Mycobacterium', 'Cytomegalovirus',
+              'Staphylococcus', 'Proteus', 'Klebsiella', 'Pseudomonas',
+              'Moraxella', 'Enterococcus', 'Enterobacter', 'Citrobacter',
+              'Haemophilus', 'Fusobacterium', 'Salmonella', 'Serratia',
+              'Aerococcus', 'Campylobacter', 'Lymphocryptovirus', 'Simplexvirus')
 
+X_new <- X[, !(colnames(X) %in% to_remove)]
 
 # t-SNE
 set.seed(66)
 require(Rtsne)
+require(vegan)
 
-perp <- 15
+# Get Bray-Curtis pairwise matrix
+bc <- vegdist(X, method = "bray")
+bc_new <- vegdist(X_new, method = "bray")
 
-tsne <- Rtsne(as.matrix(X),
+perp <- 40
+
+tsne <- Rtsne(bc,
               verbose = T,
               perplexity = perp,
               max_iter = 10000,
-              pca = F,
+              is_distance = T,
+              pca = T,
               theta = 0)
 
-tsne_new <- Rtsne(as.matrix(X_new),
+tsne_new <- Rtsne(bc_new,
               verbose = T,
               perplexity = perp,
               max_iter = 10000,
-              pca = F,
+              is_distance = T, 
+              pca = T,
               theta = 0)
 
-plot_ori <- data.frame(tsne$Y, Pathogen=y)
-plot_new <- data.frame(tsne_new$Y, Pathogen=y)
+plot_ori <- data.frame(tsne$Y, Pathogen = pathogens)
+plot_new <- data.frame(tsne_new$Y, Pathogen = pathogens)
 
 # Params
 size <- 2
+
 pal <- rep("grey70", 22)
-pal[8] <- "red"
-pal[11] <- "orange"
-pal[16] <- "purple"
-pal[7] <- "blue"
-pal[12] <- "black"
+pal[which(levels(plot_ori$Pathogen) == "Escherichia")] <- "red"
+# pal[11] <- "orange"
+# pal[16] <- "purple"
+# pal[7] <- "blue"
+# pal[12] <- "black"
 
 require(ggpubr)
 plt1 <- ggplot(plot_ori, aes(x = X1, y = X2, color = Pathogen)) +
@@ -105,4 +110,4 @@ ggarrange(plt1, plt2,
           align = "hv",
           hjust = 0)
 
-ggsave("../results/pca_tsne_septic.png", dpi = 600, width = 8, height = 5)
+ggsave("results/decontam/pca_tsne_septic.png", dpi = 600, width = 8, height = 5)
