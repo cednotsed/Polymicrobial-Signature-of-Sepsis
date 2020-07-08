@@ -75,10 +75,13 @@ cwd = Path.cwd()
 datasets = cwd / 'datasets'
 reports = cwd / 'datasets/kraken2_reports'
 
-kapusta_list = os.listdir(reports / 'kapusta_reports_silva')
+# Kapusta
+db = 'maxi'
+
+kapusta_list = os.listdir(reports / f'kapusta_reports_{db}')
 
 # Parse reports
-df = parser(kapusta_list, reports / 'kapusta_reports_maxi', delimiter='_', rank='G')
+df = parser(kapusta_list, reports / f'kapusta_reports_{db}', delimiter='_', rank='G')
 
 # Add metadata
 meta = pd.read_csv(datasets / 'kapusta_metadata_290620.tsv', sep='\t')
@@ -97,7 +100,7 @@ df.columns = df.columns.str.replace('>', '')
 df.columns = df.columns.str.replace(']', '')
 df.columns = df.columns.str.replace('[', '')
 
-# df.to_csv(datasets / 'kapusta_genus_raw_maxi.csv', index=True)
+df.to_csv(datasets / f'kapusta_genus_raw_{db}.csv', index=False)
 
 ############################## Grumaz ##################################################################################
 # Parse reports
@@ -121,7 +124,7 @@ df2.columns = df2.columns.str.replace('>', '')
 df2.columns = df2.columns.str.replace(']', '')
 df2.columns = df2.columns.str.replace('[', '')
 
-# df2.to_csv(datasets / 'grumaz_genus_raw_maxi.csv', index=True)
+# df2.to_csv(datasets / 'grumaz_genus_raw_maxi.csv', index=False)
 
 #################################### Karius ############################################################################
 
@@ -145,7 +148,7 @@ df3.columns = df3.columns.str.replace('>', '')
 df3.columns = df3.columns.str.replace(']', '')
 df3.columns = df3.columns.str.replace('[', '')
 
-df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=True)
+df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
 
 # Merge datasets
 final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)
