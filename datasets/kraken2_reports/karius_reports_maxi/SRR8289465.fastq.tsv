@@ -1,0 +1,15 @@
+ 89.19	33	33	U	0	unclassified
+ 10.81	4	0	R	1	root
+ 10.81	4	0	R1	131567	  cellular organisms
+ 10.81	4	1	D	2	    Bacteria
+  5.41	2	0	P	1224	      Proteobacteria
+  2.70	1	0	C	1236	        Gammaproteobacteria
+  2.70	1	0	O	135614	          Xanthomonadales
+  2.70	1	0	F	32033	            Xanthomonadaceae
+  2.70	1	1	G	40323	              Stenotrophomonas
+  2.70	1	1	C	28211	        Alphaproteobacteria
+  2.70	1	0	D1	1783272	      Terrabacteria group
+  2.70	1	0	P	201174	        Actinobacteria
+  2.70	1	0	C	1760	          Actinobacteria
+  2.70	1	0	O	85009	            Propionibacteriales
+  2.70	1	1	F	31957	              Propionibacteriaceae

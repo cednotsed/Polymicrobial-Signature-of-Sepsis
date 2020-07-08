@@ -145,7 +145,7 @@ df3.columns = df3.columns.str.replace('>', '')
 df3.columns = df3.columns.str.replace(']', '')
 df3.columns = df3.columns.str.replace('[', '')
 
-# df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=True)
+df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=True)
 
 # Merge datasets
 final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)

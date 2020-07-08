@@ -1,0 +1,33 @@
+ 78.57	44	44	U	0	unclassified
+ 21.43	12	0	R	1	root
+ 21.43	12	0	R1	131567	  cellular organisms
+ 21.43	12	0	D	2	    Bacteria
+ 16.07	9	2	P	1224	      Proteobacteria
+ 10.71	6	0	C	1236	        Gammaproteobacteria
+  3.57	2	0	O	72274	          Pseudomonadales
+  3.57	2	0	F	135621	            Pseudomonadaceae
+  3.57	2	2	G	286	              Pseudomonas
+  3.57	2	0	O	135622	          Alteromonadales
+  3.57	2	0	F	72275	            Alteromonadaceae
+  3.57	2	2	G	111142	              Alishewanella
+  1.79	1	0	O	135614	          Xanthomonadales
+  1.79	1	1	F	32033	            Xanthomonadaceae
+  1.79	1	0	O	135625	          Pasteurellales
+  1.79	1	0	F	712	            Pasteurellaceae
+  1.79	1	1	G	724	              Haemophilus
+  1.79	1	0	P1	68525	        delta/epsilon subdivisions
+  1.79	1	0	C	29547	          Epsilonproteobacteria
+  1.79	1	0	O	213849	            Campylobacterales
+  1.79	1	0	F	72293	              Helicobacteraceae
+  1.79	1	0	G	209	                Helicobacter
+  1.79	1	1	S	210	                  Helicobacter pylori
+  5.36	3	0	D1	1783272	      Terrabacteria group
+  3.57	2	0	P	1239	        Firmicutes
+  3.57	2	0	C	91061	          Bacilli
+  3.57	2	0	O	186826	            Lactobacillales
+  3.57	2	0	F	1300	              Streptococcaceae
+  3.57	2	2	G	1301	                Streptococcus
+  1.79	1	0	P	201174	        Actinobacteria
+  1.79	1	0	C	1760	          Actinobacteria
+  1.79	1	0	O	85007	            Corynebacteriales
+  1.79	1	1	F	1762	              Mycobacteriaceae
