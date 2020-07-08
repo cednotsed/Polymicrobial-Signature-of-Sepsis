@@ -40,6 +40,7 @@ def parser(file_list, base_dir, delimiter, rank='species'):
 
             # Drop unknown taxa
             rank_df = rank_df.loc[rank_df.taxName != 'uncultured', :]
+            rank_df = rank_df.loc[rank_df.taxName != 'Unknown Family', :]
             rank_df = rank_df.loc[rank_df.taxName != 'Incertae Sedis', :]
 
             # Check for duplicate genera
@@ -55,8 +56,11 @@ def parser(file_list, base_dir, delimiter, rank='species'):
             # Outer join to get most taxa
             df_full = df_full.merge(rank_df, how='outer', on=rank)
 
-        except:
+        except AssertionError:
             problem_files.append(file_name)
+
+        except ValueError:
+            print(file_name)
 
     print("These files were in an invalid format:")
     print(*problem_files, sep='\n')
@@ -76,12 +80,13 @@ datasets = cwd / 'datasets'
 reports = cwd / 'datasets/kraken2_reports'
 
 # Kapusta
-db = 'maxi'
+db = 'silva'
+rank = 'G'
 
 kapusta_list = os.listdir(reports / f'kapusta_reports_{db}')
 
 # Parse reports
-df = parser(kapusta_list, reports / f'kapusta_reports_{db}', delimiter='_', rank='G')
+df = parser(kapusta_list, reports / f'kapusta_reports_{db}', delimiter='_', rank=rank)
 
 # Add metadata
 meta = pd.read_csv(datasets / 'kapusta_metadata_290620.tsv', sep='\t')
@@ -100,7 +105,7 @@ df.columns = df.columns.str.replace('>', '')
 df.columns = df.columns.str.replace(']', '')
 df.columns = df.columns.str.replace('[', '')
 
-df.to_csv(datasets / f'kapusta_genus_raw_{db}.csv', index=False)
+# df.to_csv(datasets / f'kapusta_genus_raw_{db}.csv', index=False)
 
 ############################## Grumaz ##################################################################################
 # Parse reports
@@ -151,6 +156,9 @@ df3.columns = df3.columns.str.replace('[', '')
 df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
 
 # Merge datasets
+assert db == 'silva' and rank == 'G'
+
 final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)
 final_df.to_csv(datasets / 'kapusta_grumaz_karius_genus_raw.csv', sep=',', index=False, header=True)
 
+final_df
