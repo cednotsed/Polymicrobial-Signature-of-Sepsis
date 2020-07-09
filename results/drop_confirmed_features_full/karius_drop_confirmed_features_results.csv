@@ -1,9 +1,9 @@
 ,test_precision,test_recall,test_F1,test_AUROC
-Without Confirmed,0.929,0.838,0.877,0.962
-Without Confirmed (RA),0.936,0.872,0.899,0.96
-Only Confirmed,0.909,0.797,0.843,0.922
-Only Confirmed (RA),0.945,0.889,0.911,0.964
-Simple Decontam without Confirmed,0.805,0.718,0.756,0.873
-Simple Decontam without Confirmed (RA),0.825,0.77,0.791,0.894
-Without Confirmed CR,0.778,0.718,0.741,0.87
-Without Confirmed (RA),0.788,0.762,0.766,0.889
+Without Confirmed,0.919,0.829,0.863,0.966
+Without Confirmed (RA),0.93,0.845,0.876,0.971
+Only Confirmed,0.905,0.811,0.851,0.921
+Only Confirmed (RA),0.876,0.862,0.863,0.955
+Simple Decontam without Confirmed,0.766,0.736,0.743,0.874
+Simple Decontam without Confirmed (RA),0.828,0.744,0.771,0.886
+Without Confirmed CR,0.795,0.727,0.754,0.87
+Without Confirmed (RA),0.754,0.689,0.712,0.856
