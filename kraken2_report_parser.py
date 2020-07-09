@@ -153,7 +153,7 @@ df3.columns = df3.columns.str.replace('>', '')
 df3.columns = df3.columns.str.replace(']', '')
 df3.columns = df3.columns.str.replace('[', '')
 
-df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
+# df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
 
 # Merge datasets
 assert db == 'silva' and rank == 'G'
@@ -161,4 +161,3 @@ assert db == 'silva' and rank == 'G'
 final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)
 final_df.to_csv(datasets / 'kapusta_grumaz_karius_genus_raw.csv', sep=',', index=False, header=True)
 
-final_df

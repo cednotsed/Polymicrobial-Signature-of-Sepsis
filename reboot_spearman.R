@@ -1,17 +1,24 @@
 # Simple decontamination networks
+
 rm(list=ls())
 #library(devtools)
 #install_github("hallucigenia-sparsa/seqgroup")
+require('seqgroup')
 setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis')
 
-df <- read.csv('datasets/kapusta_grumaz_karius_genus_raw.csv')
-# meta <- read.csv('datasets/simple_decontam_pathogens.csv', header = F, stringsAsFactors = F)
-# meta <- meta[, 1]
+df <- read.csv('datasets/karius_genus_raw.csv')
+meta <- read.csv('datasets/simple_decontam_pathogens.csv', header = F, stringsAsFactors = F)
+meta <- meta[, 1]
 
-# df <- df[df$pathogen %in% c("none", "Escherichia coli"), ]
+X <- df[, meta]
 
-# X <- df[, meta]
-X <- df[, 2:ncol(df)]
+septic <- X[df$y == 'septic', ]
+healthy <- X[df$y == 'healthy', ]
+healthy <- sample(healthy, size = length(septic))
+
+# Tranpose to get taxa as rows samples as columns
+septic <- t(septic) 
+healthy <- t(healthy)
 
 # Count number of samples with non-zero k-mer counts
 get_number <- function(df) {
@@ -23,25 +30,14 @@ get_number <- function(df) {
 }
 
 numbers <- get_number(X)
-to_retain <- names(numbers)[numbers > nrow(df) / 2]
-X <- X[, to_retain]
-
-septic <- X[df$y == 'septic', ]
-healthy <- X[df$y == 'healthy', ]
-healthy <- sample(healthy, size = length(septic))
-
-# Tranpose to get taxa as rows samples as columns
-septic <- t(septic) 
-healthy <- t(healthy)
 
 # Plot Septic network
 set.seed(69)
-edges <- 50
+edges <- 30
 pval <- 0.05
 width <- 8
 
 # Plot septic graph
-require(seqgroup)
 septic_graph <- barebonesCoNet(septic,
                                norm = T,
                                methods = c("spearman"),
@@ -153,5 +149,3 @@ plot(septic_filtered,
 #        pch = 19, cex = 1.2)
 
 dev.off()
-
-

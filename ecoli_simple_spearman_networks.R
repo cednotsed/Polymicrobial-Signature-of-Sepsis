@@ -3,16 +3,10 @@ rm(list=ls())
 #install_github("hallucigenia-sparsa/seqgroup")
 require('seqgroup')
 setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis')
-df <- read.csv('datasets/karius_genus_raw.csv')
-meta <- read.csv("datasets/pathogen_list.csv")
-meta <- meta$Genus
-
-pathogens <- c('Escherichia', 'Prevotella', 'Bacteroides', 'Lactobacillus', 
-               'Stenotrophomonas', 'Lymphocryptovirus', 'Shigella', 
-               'Burkholderia', 'Cellulomonas', 'Paracoccus')
+df <- read.csv('datasets/karius_genus_raw_maxi.csv')
 
 X <- df[, 3:ncol(df)]
-X <- X[, colnames(X) %in% meta]
+
 septic <- X[df$y == 'septic' & df$pathogen == "Escherichia coli", ]
 healthy <- X[df$y == 'healthy', ]
 healthy <- sample(healthy, size = length(septic))
@@ -20,7 +14,8 @@ healthy <- sample(healthy, size = length(septic))
 rho_vec <- c()
 p_vec <- c()
 name_vec <- c()
-test_df <- rbind(septic, healthy)
+# test_df <- rbind(septic, healthy)
+test_df <- septic
 
 for (pathogen in colnames(X)) {
   test <- cor.test(test_df$Escherichia, test_df[, pathogen], method = "spearman", exact = F)
@@ -35,7 +30,7 @@ for (pathogen in colnames(X)) {
 
 results <- data.frame(rho = rho_vec, p = p_vec)
 rownames(results) <- name_vec
-results$p <- results$p * nrow(results)
+# results$p <- results$p * nrow(results)
 results <- results[results$p < 0.05, ]
 results <- results[order(results$rho, decreasing = T), ]
 
