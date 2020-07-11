@@ -33,7 +33,7 @@ def parser(file_list, base_dir, delimiter, rank='species'):
             # Retrieve taxa rank of choice
             assert rank in df['rank'].unique()
             rank_df = df[df['rank'] == rank]
-            rank_df = rank_df[['taxName', 'reads']]
+            rank_df = rank_df[['taxName', 'cum_reads']]
 
             # Strip whitespace
             rank_df.loc[:, 'taxName'] = rank_df.loc[:, 'taxName'].str.strip()
@@ -105,8 +105,7 @@ df.columns = df.columns.str.replace('>', '')
 df.columns = df.columns.str.replace(']', '')
 df.columns = df.columns.str.replace('[', '')
 
-# df.to_csv(datasets / f'kapusta_genus_raw_{db}.csv', index=False)
-
+df.to_csv(datasets / f'kapusta_genus_raw_{db}.csv', index=False)
 ############################## Grumaz ##################################################################################
 # Parse reports
 grumaz_list = os.listdir(reports / 'grumaz_reports_maxi')
@@ -153,7 +152,7 @@ df3.columns = df3.columns.str.replace('>', '')
 df3.columns = df3.columns.str.replace(']', '')
 df3.columns = df3.columns.str.replace('[', '')
 
-# df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
+df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
 
 # Merge datasets
 assert db == 'silva' and rank == 'G'

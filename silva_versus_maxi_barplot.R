@@ -1,20 +1,21 @@
 setwd("~/git_repos/Polymicrobial-Signature-of-Sepsis/datasets")
-maxi <- read.csv("kapusta_order_raw_maxi.csv")
-silva <- read.csv("kapusta_order_raw_silva.csv")
+maxi <- read.csv("kapusta_order_raw_maxi.csv", stringsAsFactors = F)
+silva <- read.csv("kapusta_order_raw_silva.csv", stringsAsFactors = F)
 common_cols <- intersect(colnames(maxi), colnames(silva))
+common_cols <- common_cols[common_cols != "y"]
 
 y <- as.character(maxi[, "y"])
 y[y == "healthy"] <- "Healthy"
 y[y == "septic"] <- "Septic"
 y[y == "ntc"] <- "NTC"
 
-maxi <- maxi[, common_cols]
 maxi <- maxi[, 2:ncol(maxi)]
+maxi <- maxi[, common_cols]
 maxi <- maxi / apply(maxi, 1, sum) * 100
 maxi <- aggregate(maxi, by=list(y), mean)
 
-silva <- silva[, common_cols]
 silva <- silva[, 2:ncol(silva)]
+silva <- silva[, common_cols]
 silva <- silva / apply(silva, 1, sum) * 100
 silva <- aggregate(silva, by=list(y), mean)
 
@@ -28,7 +29,7 @@ melted_maxi <- melted_maxi[melted_maxi$variable %in% orders,]
 
 # Get most abundant orders
 means <- aggregate(melted_maxi$value, by=list(melted_maxi$variable), mean)
-orders <- means$Group.1[order(means$x, decreasing = T)][1:8]
+orders <- as.character(means$Group.1)[order(means$x, decreasing = T)][1:8]
 
 # Silva db
 melted_silva <- melt(silva)
