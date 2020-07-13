@@ -1,6 +1,6 @@
 rm(list = ls())
-setwd("~/sepsis/workspace/karius/datasets/")
-df <- read.csv("karius_genus_pathogens.csv", sep = ",", stringsAsFactors = F)
+setwd("~/git_repos/Polymicrobial-Signature-of-Sepsis/")
+df <- read.csv("datasets/karius_genus_raw_maxi.csv", sep = ",", stringsAsFactors = F)
 df$pathogen[df$pathogen == "Human herpesvirus 4"] <- "Lymphocryptovirus"
 df$pathogen[df$pathogen == "Human herpesvirus 1"] <- "Simplexvirus"
 df$pathogen[df$pathogen == "Human herpesvirus 5"] <- "Cytomegalovirus"
@@ -26,6 +26,6 @@ ggplot(plot_df, aes(x = y, y = value, fill = y)) +
         axis.ticks.x = element_blank(),
         legend.title = element_blank())
 
-ggsave("../results/confirmed_pathogens.png", dpi = 600, width = 6, height = 4)
+ggsave("results/confirmed_pathogens.png", dpi = 600, width = 6, height = 4)
   
 

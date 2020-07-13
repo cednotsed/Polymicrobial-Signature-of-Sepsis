@@ -45,7 +45,7 @@ require(vegan)
 bc <- vegdist(X, method = "bray")
 bc_new <- vegdist(X_new, method = "bray")
 
-perp <- 20
+perp <- 30
 
 tsne <- Rtsne(bc,
               verbose = T,

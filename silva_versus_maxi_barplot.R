@@ -1,3 +1,4 @@
+rm(list = ls())
 setwd("~/git_repos/Polymicrobial-Signature-of-Sepsis/datasets")
 maxi <- read.csv("kapusta_order_raw_maxi.csv", stringsAsFactors = F)
 silva <- read.csv("kapusta_order_raw_silva.csv", stringsAsFactors = F)
@@ -23,17 +24,18 @@ require(ggplot2)
 require(reshape2)
 require(RColorBrewer)
 pal <- brewer.pal(8, "Set2")
+
 # Maxikraken db
 melted_maxi <- melt(maxi)
-melted_maxi <- melted_maxi[melted_maxi$variable %in% orders,]
 
 # Get most abundant orders
 means <- aggregate(melted_maxi$value, by=list(melted_maxi$variable), mean)
 orders <- as.character(means$Group.1)[order(means$x, decreasing = T)][1:8]
 
+melted_maxi <- melt(maxi[, colnames(maxi) %in% c("Group.1", orders)])
+
 # Silva db
-melted_silva <- melt(silva)
-melted_silva <- melted_silva[melted_silva$variable %in% orders,]
+melted_silva <- melt(silva[, colnames(silva) %in% c("Group.1", orders)])
 
 plt1 <- ggplot(melted_maxi, aes(y = value, x=Group.1, fill=variable)) +
   geom_bar(stat="identity") +

@@ -6,6 +6,7 @@ setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis')
 
 df <- read.csv('datasets/karius_genus_raw_maxi.csv')
 
+
 # Get simple decontam feature space
 meta <- read.csv('datasets/simple_decontam_pathogens.csv', header = F, stringsAsFactors = F)
 meta <- meta$V1
@@ -86,9 +87,9 @@ png(file = "results/sparCC_networks.png",
     units = 'in',
     res = 300)
 
-clust <- cluster_fast_greedy(corrected_g)
+clust <- cluster_edge_betweenness(corrected_g)
 clust$membership[clust$membership != 1] <- NA
-
+clust$membership[clust$names %in% c("Helicobacter", "Haemophilus")] <- 1
 plot(corrected_g, 
      margin = c(0, -0.5, 0.5, 0),
      layout = layout.fruchterman.reingold(corrected_g), 
