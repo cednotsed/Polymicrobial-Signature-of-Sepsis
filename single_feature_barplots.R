@@ -5,12 +5,11 @@ setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis/results/drop_confirmed_feat
 df <- read.csv('single_feature_auroc_no_confirmed.csv', stringsAsFactors = F)
 colnames(df) <- c("Model", "AUROC")
 model <- read.csv("karius_drop_confirmed_features_results.csv", stringsAsFactors = F)
-model <- model[c(5, 7), c("X", "test_AUROC")]
+model <- model[c(7), c("X", "test_AUROC")]
 colnames(model) <- colnames(df)
 
 plot_df <- rbind(model, df)
-plot_df$Model[plot_df$Model == "Simple Decontam without Confirmed"] <- "Raw SD (pathogens removed)"
-plot_df$Model[plot_df$Model == "Without Confirmed CR"] <- "Raw CR (pathogens removed)"
+plot_df$Model[plot_df$Model == "Without Confirmed CR"] <- "Karius-CR2"
 plot_df$Model <- factor(plot_df$Model, levels=plot_df$Model[order(plot_df$AUROC, decreasing = T)])
 plot_df$AUROC <- plot_df$AUROC - 0.5
 
