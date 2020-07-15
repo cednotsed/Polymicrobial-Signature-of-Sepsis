@@ -2,7 +2,7 @@
 rm(list=ls())
 setwd('~/git_repos/Polymicrobial-Signature-of-Sepsis')
 
-df <- read.csv('datasets/kapusta_grumaz_karius_genus_raw.csv')
+df <- read.csv('datasets/karius_genus_raw_maxi.csv')
 
 
 # Get simple decontam feature space
@@ -62,12 +62,12 @@ confirmed <- c('Escherichia', 'Streptococcus', 'Mycobacterium', 'Cytomegalovirus
                'Haemophilus', 'Fusobacterium', 'Salmonella', 'Serratia',
                'Aerococcus', 'Campylobacter', 'Lymphocryptovirus', 'Simplexvirus')
 
-CR <- c('Morganella', 'Blautia', 'Raoultella', 'Cellulosimicrobium',
-        'Campylobacter', 'Alloprevotella', 'Megasphaera', 'Bacteroides',
-        'Shewanella', 'Salmonella', 'Citrobacter', 'Cellulomonas',
-        'Stenotrophomonas', 'Oerskovia', 'Enterobacter', 'Cupriavidus',
-        'Rhodococcus', 'Clostridioides', 'Klebsiella', 'Pandoraea',
-        'Cronobacter')
+CR <- c('Bacillus', 'Burkholderia', 'Enterococcus', 'Aeromonas', 'Cronobacter',
+        'Cytomegalovirus', 'Lymphocryptovirus', 'Campylobacter', 'Pantoea',
+        'Shigella', 'Klebsiella', 'Cellulomonas', 'Salmonella', 'Shewanella',
+        'Megasphaera', 'Stenotrophomonas', 'Agrobacterium', 'Oerskovia',
+        'Prevotella', 'Escherichia', 'Blautia', 'Bacteroides', 'Enterobacter',
+        'Alphatorquevirus', 'Veillonella')
 
 # Annotate vertex colors
 V(corrected_g)$color <- "#999999"
@@ -80,18 +80,18 @@ V(corrected_g)[CR_confirmed_v]$color <- "purple"
 
 
 # Plot
-png(file = "results/sparCC_networks_pooled.png", 
+png(file = "results/sparCC_networks_karius.png", 
     width = 10, 
     height = 8,
     units = 'in',
     res = 300)
 
-clust <- cluster_louvain(corrected_g)
-clust$membership[clust$membership != 4] <- NA
-clust$membership[clust$names %in% c("Parabacteroides", "Alistipes")] <- NA
+clust <- cluster_edge_betweenness(corrected_g)
+clust$membership[clust$membership != 1] <- NA
+clust$membership[clust$names %in% c("Helicobacter", "Haemophilus")] <- 1
 plot(corrected_g, 
      margin = c(0, -0.5, 0.5, 0),
-     layout = layout.fruchterman.reingold(corrected_g, weight = E(corrected_g)$weight * 1 / 2000, niter = 1000), 
+     layout = layout.fruchterman.reingold(corrected_g), 
      vertex.size = 5,
      vertex.label.color = "black",
      vertex.frame.color = NA,
@@ -99,15 +99,16 @@ plot(corrected_g,
      edge.width = E(corrected_g)$weight * 10,
      mark.groups = communities(clust), 
      mark.col = c("#66FFFF"),
-     mark.border = c("#66FFFF")
-)
+     mark.border = c("#66FFFF"))
 
-legend("topright", legend=c("In CR feature space"),
-       col=c("blue"),
+legend("topright", legend=c("Confirmed pathogen", 
+                            "In CR feature space", 
+                            "Confirmed pathogen and in CR feature space"),
+       col=c("red", "blue", "purple"),
        border = "black",
        pch = 19, cex = 1.2)
 
-text(1.4, 0, "Oral commensals", font = 2)
+text(-0.4, 0.2, "Oral commensals", font = 2)
 
 dev.off()
 
