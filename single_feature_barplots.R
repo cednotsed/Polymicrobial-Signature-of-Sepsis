@@ -14,15 +14,15 @@ plot_df$Model <- factor(plot_df$Model, levels=plot_df$Model[order(plot_df$AUROC,
 plot_df$AUROC <- plot_df$AUROC - 0.5
 
 require(ggplot2)
-ggplot(plot_df, aes(x = Model, y = AUROC, fill = AUROC)) + 
+ggplot(plot_df, aes(x = Model, y = AUROC, fill = Model)) + 
   geom_bar(stat = "identity") +
   labs(x = "Feature Space", y = "AUROC") +
-  scale_fill_gradient(high = "red", low = "blue") +
+  scale_fill_manual(values = c("tomato1", rep("grey", 22))) +
   ylim(c(0, 0.5)) +
   scale_y_continuous(breaks = seq(0, 0.5, 0.1), 
                      labels = as.character(seq(0.5, 1.0, 0.1)), 
                      limits = c(0, 0.5)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "none",
-        plot.margin = unit(c(0,0,0,2), "cm")) 
+        plot.margin = unit(c(0,0,0,1), "cm")) 
 ggsave("AUROC_barplot.png", dpi=600, width = 5, height = 4)
