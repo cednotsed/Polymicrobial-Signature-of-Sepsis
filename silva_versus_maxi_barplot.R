@@ -42,13 +42,15 @@ melted_silva$variable <- factor(melted_silva$variable, levels = orders)
 plt1 <- ggplot(melted_maxi, aes(y = value, x=Group.1, fill=variable)) +
   geom_bar(stat="identity") +
   labs(fill = "Order", x = "MaxiKraken2", y = "Mean Relative Abundance (%)") +
-  scale_fill_manual(values = pal)
+  scale_fill_manual(values = pal) +
+  theme(plot.margin = unit(c(0,0,0,1), "cm"))
 
 plt2 <- ggplot(melted_silva, aes(y = value, x=Group.1, fill=variable)) +
   geom_bar(stat="identity") +
   theme(axis.text.y = element_blank(),
         axis.title.y = element_blank(),
-        axis.ticks.y = element_blank()) +
+        axis.ticks.y = element_blank(),
+        plot.margin = unit(c(0,0,0,1), "cm")) +
   labs(fill = "Order", x = "Silva") +
   scale_fill_manual(values = pal)
 
@@ -72,8 +74,13 @@ plot_df$V6 <- factor(plot_df$V6, levels = orders)
 plt3 <- ggplot(plot_df, aes(y = V1, x = Database, fill = V6)) +
         geom_bar(stat="identity") +
         labs(fill = "Order", x = "Database", y = "Proportion of minimisers (%)") +
-        scale_fill_manual(values = pal)
+        scale_fill_manual(values = pal) +
+        theme(plot.margin = unit(c(0,0,0,1), "cm"))
 
 require(ggpubr)
-ggarrange(plt1, plt2, plt3, ncol = 2, nrow = 2, common.legend = T, align = "hv")
+ggarrange(plt1, plt2, plt3, 
+          ncol = 2, nrow = 2, 
+          common.legend = T, 
+          align = "hv",
+          labels = "auto")
 ggsave("../results/silva_versus_maxi_barplot.png", dpi = 600, width = 8, height = 5)
