@@ -71,13 +71,6 @@ CR <- c('Morganella', 'Blautia', 'Raoultella', 'Cellulosimicrobium',
 
 # Annotate vertex colors
 V(corrected_g)$color <- "#999999"
-confirmed_v <- V(corrected_g)$name %in% confirmed
-CR_v <- V(corrected_g)$name %in% CR
-CR_confirmed_v <- V(corrected_g)$name %in% intersect(confirmed, CR)
-V(corrected_g)[confirmed_v]$color <- "red"
-V(corrected_g)[CR_v]$color <- "blue"
-V(corrected_g)[CR_confirmed_v]$color <- "purple"
-
 
 # Plot
 png(file = "results/sparCC_networks_pooled.png", 
@@ -91,23 +84,24 @@ clust$membership[clust$membership != 4] <- NA
 clust$membership[clust$names %in% c("Parabacteroides", "Alistipes")] <- NA
 plot(corrected_g, 
      margin = c(0, -0.5, 0.5, 0),
-     layout = layout.fruchterman.reingold(corrected_g, weight = E(corrected_g)$weight * 1 / 2000, niter = 1000), 
-     vertex.size = 5,
+     layout = layout.fruchterman.reingold(corrected_g, 
+                                          weight = E(corrected_g)$weight * 1 / 2000, 
+                                          niter = 1000), 
+     vertex.size = 2,
      vertex.label.color = "black",
      vertex.frame.color = NA,
-     vertex.label.dist = 1,
+     vertex.label.dist = 0,
+     vertex.label.cex = 0.6,
      edge.width = E(corrected_g)$weight * 10,
      mark.groups = communities(clust), 
      mark.col = c("#66FFFF"),
-     mark.border = c("#66FFFF")
+     mark.border = c("#66FFFF"),
+     asp = 0,
+     xlim = c(-1.5, 1.1),
+     ylim = c(-1.1, 1)
 )
 
-legend("topright", legend=c("In CR feature space"),
-       col=c("blue"),
-       border = "black",
-       pch = 19, cex = 1.2)
-
-text(1.4, 0, "Oral commensals", font = 2)
+text(0.9, 1, "Oral commensals", font = 2)
 
 dev.off()
 

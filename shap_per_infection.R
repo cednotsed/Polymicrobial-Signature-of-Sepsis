@@ -15,7 +15,8 @@ plt1  <- ggplot(df, aes(x = Genus, y = shap, color = color)) +
          theme(axis.title.x = element_blank(),
                axis.text.x = element_blank(),
                axis.ticks.x = element_blank(),
-               legend.position = "none")
+               legend.position = "none",
+               legend.title = element_blank())
          
 
 ## Boxplot of genera abundance
@@ -28,7 +29,8 @@ plt2  <- ggplot(df, aes(x = Genus, y = abundance)) +
          theme_bw() +
          theme(axis.ticks.x = element_blank(),
                axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5),
-               legend.position = "none")
+               legend.position = "none",
+               legend.title = element_blank())
 
 require(ggpubr)         
 ggarrange(plt1, plt2, 
@@ -38,3 +40,5 @@ ggarrange(plt1, plt2,
           labels = "auto",
           label.y = 1.1)
 ggsave("results/shap_by_infection.png", dpi = 600, width = 6, height = 5)
+
+read.csv("datasets/karius_genus_raw_maxi.csv")
