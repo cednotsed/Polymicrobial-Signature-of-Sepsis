@@ -156,6 +156,9 @@ df3.to_csv(datasets / 'karius_genus_raw_maxi.csv', index=False, header=True)
 
 # Merge datasets
 assert db == 'silva' and rank == 'G'
+df.insert(value='kapusta', loc=0, column='dataset')
+df2.insert(value='grumaz', loc=0, column='dataset')
+df3.insert(value='karius', loc=0, column='dataset')
 
 final_df = pd.concat([df, df2, df3], axis=0, join='inner', ignore_index=True)
 final_df.to_csv(datasets / 'kapusta_grumaz_karius_genus_raw.csv', sep=',', index=False, header=True)
