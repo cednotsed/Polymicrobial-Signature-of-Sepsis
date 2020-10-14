@@ -1,0 +1,5 @@
+,test_precision,test_recall,test_F1,test_AUROC,test_AUPRC,external_test_precision,external_test_recall,external_test_F1,external_test_AUROC,external_test_AUPRC
+Raw,0.956,0.937,0.945,0.982,0.928,0.789,0.982,0.875,0.478,0.786
+RA,0.966,0.914,0.938,0.987,0.923,0.75,0.789,0.769,0.127,0.627
+Raw CR,0.891,0.816,0.848,0.921,0.813,0.808,0.737,0.771,0.342,0.683
+RA CR,0.871,0.787,0.823,0.916,0.79,0.69,0.509,0.586,0.236,0.671
